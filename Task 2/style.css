@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+font-family: "Jost", sans-serif;
+font-optical-sizing: auto;
+font-style: normal;
+
+
+}
+
+body{
+background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+}
+
+
+.Navigation{
+display: flex;
+justify-content: space-evenly;
+flex-direction: row;
+margin-top: 20px;
+
+}
+
+
+.Navigation a{
+display: inline-block;
+text-decoration: none;
+color: black;
+text-shadow: 2px 2px 5px grey;
+transition: 0.2s ease-in-out;
+
+}
+
+.Navigation a:hover{
+    transform: scale(1.1);
+    color: blueviolet;
+}
+
+img{
+    height: 300px;
+    margin-left: 10px;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+
+}
+
+ul li{
+    margin-left: 20px;      
+    padding-left: 20px; 
+
+}
+
+#Contact,#Skill,#Edu,#About{
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: 2px 2px 5px grey;
+
+}
+
+h1{
+    margin-left:20px ;
+}
