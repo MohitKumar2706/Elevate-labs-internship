@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact </title>
+  <link rel="stylesheet" href="./style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+      <nav class="Navigation">
+       <h2><a href="./AboutMe.html">About Me</a></h2>
+       <h2> <a href="./Education.html">Education</a></h2>
+       <h2><a href="./Skills.html">Skills</a></h2>
+       <h2><a href="./ContactDetails.html">Contact Details</a></h2>
+       <h2><a href="./ContactMe.html">Contact Me</a></h2> 
+    </nav>
+
+    <hr><br>
+
+    
+<h1> Contact form</h1>
+  <Form  >
+
+    <label for="name"><b>Name:</b> </label>
+    <input type="text" placeholder="Enter your name" id="name" required name="name">
+
+    <label for="email"><b>Email:</b></label>
+    <input type="email" placeholder="Enter your Email" id="email" required  name="email">
+
+    <label for="phone"><b>Phone.No:</b></label>
+    <input type="tel" placeholder="Enter your Phone number" id="phone" pattern="[0-9]{10}" maxlength="10" name="phone">
+
+    <label for="profession"><b>profession:</b>  </label>
+
+  <section class="radioBtns">
+    <label for="student">student</label>
+    <input type="radio" name="prop" id="student" value="student">
+
+    <label for="Teacher">Teacher</label>
+    <input type="radio" name="prop" id="Teacher" value="Teacher">
+
+    <label for="WorkingProfessional">Working Professional</label>
+    <input type="radio" name="prop" id="WorkingProfessional" value="WorkingProp">
+
+  </section>
+
+    <label for="message"><b>Any Reviews:</b></label>
+    <textarea rows="4"id="message" placeholder="Write here" name="Message is"></textarea>
+
+<section class="Btns">
+  <button type="submit">Submit</button>
+  <button type="reset">reset</button>
+</section>
+    
+  </Form>
+
+
+    <footer class="footer">
+<p> <a href="./AboutMe.html"><button class="HomeBtn">Home</button></a> &nbsp; Page... <a href="./AboutMe.html">1</a> <a href="./Education.html">2</a> <a href="./Skills.html">3</a> <a href="./ContactDetails.html">4</a>  <a href="./ContactMe.html">5</a> &nbsp;<button class="BackBtn" onclick="history.back()">Back</button><p>
+    </footer>
+
+
+</body>
+</html>
