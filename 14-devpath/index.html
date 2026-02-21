@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevPath — Career Roadmap Tracker</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      Dev<span>Path</span>
+      <small>Career Roadmap Tracker</small>
+    </div>
+
+    <div class="user-badge">
+      <div class="avatar" id="avatarInitial">A</div>
+      <div class="user-info">
+        <div class="user-name" id="sidebarUsername">Alex Chen</div>
+        <div class="user-level" id="sidebarLevel">Lv.1 — Developer</div>
+      </div>
+    </div>
+
+    <div class="streak-display">
+      <div class="streak-fire">🔥</div>
+      <div class="streak-info">
+        <div class="streak-count" id="streakCount">1</div>
+        <div class="streak-label">day streak</div>
+      </div>
+    </div>
+
+    <nav>
+      <div class="nav-section-label">Main</div>
+      <div class="nav-item active" data-page="dashboard">
+        <span class="nav-icon">⚡</span> Dashboard
+      </div>
+      <div class="nav-item" data-page="goals">
+        <span class="nav-icon">🎯</span> My Goals
+        <span class="badge-count" id="goalsCount">0</span>
+      </div>
+      <div class="nav-item" data-page="roadmap">
+        <span class="nav-icon">🗺️</span> Roadmap
+      </div>
+      <div class="nav-section-label" style="margin-top:8px">Progress</div>
+      <div class="nav-item" data-page="badges">
+        <span class="nav-icon">🏆</span> Badges
+      </div>
+      <div class="nav-item" data-page="activity">
+        <span class="nav-icon">📅</span> Activity
+      </div>
+      <div class="nav-section-label" style="margin-top:8px">Community</div>
+      <div class="nav-item" data-page="mentor">
+        <span class="nav-icon">💬</span> Mentor Feedback
+      </div>
+      <div class="nav-section-label" style="margin-top:8px">Account</div>
+      <div class="nav-item" data-page="profile">
+        <span class="nav-icon">👤</span> Profile
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- Dashboard Page -->
+    <div class="page active" id="page-dashboard">
+      <div class="topbar">
+        <h1>Dashboard <span>// overview</span></h1>
+        <button class="btn btn-primary" onclick="openGoalModal()">+ New Goal</button>
+      </div>
+      <div class="page-body">
+        <div class="stats-grid">
+          <div class="stat-card" style="--stat-color:#7c3aed">
+            <div class="stat-value" id="stat-total">0</div>
+            <div class="stat-label">Total Goals</div>
+            <div class="stat-icon">🎯</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#10b981">
+            <div class="stat-value" id="stat-done">0</div>
+            <div class="stat-label">Completed</div>
+            <div class="stat-icon">✅</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#06b6d4">
+            <div class="stat-value" id="stat-milestones">0</div>
+            <div class="stat-label">Milestones Hit</div>
+            <div class="stat-icon">🏁</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#f59e0b">
+            <div class="stat-value" id="stat-streak">0</div>
+            <div class="stat-label">Day Streak</div>
+            <div class="stat-icon">🔥</div>
+          </div>
+        </div>
+        <div class="section-title">Active Goals</div>
+        <div class="goals-grid" id="dashboard-goals-grid">
+          <div class="empty-state">
+            <div class="empty-icon">🚀</div>
+            <p>No goals yet. Start your journey!</p>
+            <button class="btn btn-primary" onclick="openGoalModal()">Create First Goal</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Goals Page -->
+    <div class="page" id="page-goals">
+      <div class="topbar">
+        <h1>My Goals <span>// all goals</span></h1>
+        <div class="tabs" style="margin:0">
+          <div class="tab active" onclick="filterGoals('all',this)">All</div>
+          <div class="tab" onclick="filterGoals('active',this)">Active</div>
+          <div class="tab" onclick="filterGoals('completed',this)">Completed</div>
+        </div>
+        <button class="btn btn-primary" onclick="openGoalModal()">+ New Goal</button>
+      </div>
+      <div class="page-body">
+        <div class="goals-grid" id="all-goals-grid">
+          <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            <p>No goals found.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Roadmap Page -->
+    <div class="page" id="page-roadmap">
+      <div class="topbar">
+        <h1>Roadmap <span>// visual overview</span></h1>
+        <button class="btn btn-secondary" onclick="renderRoadmap()">↻ Refresh</button>
+      </div>
+      <div class="page-body">
+        <div class="section-title">Goal Dependency Map</div>
+        <div class="mermaid-wrap">
+          <div id="roadmap-chart" class="mermaid"></div>
+        </div>
+        <div class="section-title">Timeline</div>
+        <div class="timeline" id="roadmap-timeline">
+          <div style="color:var(--muted);font-size:0.75rem">Add goals to see your timeline.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Badges Page -->
+    <div class="page" id="page-badges">
+      <div class="topbar">
+        <h1>Badges <span>// achievements</span></h1>
+      </div>
+      <div class="page-body">
+        <div class="section-title">Your Achievements</div>
+        <div class="badges-grid" id="badges-grid"></div>
+      </div>
+    </div>
+
+    <!-- Activity Page -->
+    <div class="page" id="page-activity">
+      <div class="topbar">
+        <h1>Activity <span>// history</span></h1>
+      </div>
+      <div class="page-body">
+        <div class="section-title">Recent Activity</div>
+        <div class="timeline" id="activity-timeline">
+          <div style="color:var(--muted);font-size:0.75rem">No activity yet.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mentor Page -->
+    <div class="page" id="page-mentor">
+      <div class="topbar">
+        <h1>Mentor Feedback <span>// community</span></h1>
+        <button class="btn btn-primary" onclick="openFeedbackModal()">+ Add Feedback</button>
+      </div>
+      <div class="page-body">
+        <div class="section-title">Feedback & Notes</div>
+        <div class="feedback-list" id="feedback-list">
+          <div class="empty-state">
+            <div class="empty-icon">💬</div>
+            <p>No feedback yet. Ask a mentor to review your goals!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Page -->
+    <div class="page" id="page-profile">
+      <div class="topbar">
+        <h1>Profile <span>// settings</span></h1>
+      </div>
+      <div class="page-body" style="max-width:500px">
+        <div class="section-title">Your Info</div>
+        <div class="form-group">
+          <label>Display Name</label>
+          <input class="form-control" id="profile-name" placeholder="Your name" value="Alex Chen">
+        </div>
+        <div class="form-group">
+          <label>Current Role</label>
+          <input class="form-control" id="profile-role" placeholder="e.g. Frontend Dev Intern" value="Full Stack Dev">
+        </div>
+        <div class="form-group">
+          <label>Target Role</label>
+          <input class="form-control" id="profile-target" placeholder="e.g. Senior Engineer" value="Senior Software Engineer">
+        </div>
+        <div class="form-group">
+          <label>Learning Focus</label>
+          <select class="form-control" id="profile-focus">
+            <option>Frontend Development</option>
+            <option>Backend Development</option>
+            <option selected>Full Stack Development</option>
+            <option>DevOps / Cloud</option>
+            <option>Machine Learning</option>
+            <option>Mobile Development</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" onclick="saveProfile()">💾 Save Profile</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Goal Modal -->
+<div class="modal-overlay" id="goalModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('goalModal')">✕</button>
+    <h2 id="modalTitle">New Goal</h2>
+    <input type="hidden" id="editingId">
+    <div class="form-group">
+      <label>Goal Icon</label>
+      <div class="emoji-grid" id="emojiPicker"></div>
+    </div>
+    <div class="form-group">
+      <label>Goal Title</label>
+      <input class="form-control" id="goalTitle" placeholder="e.g. Master React & Next.js">
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea class="form-control" id="goalDesc" placeholder="What will you learn and why?"></textarea>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Category</label>
+        <select class="form-control" id="goalCategory">
+          <option value="frontend">Frontend</option>
+          <option value="backend">Backend</option>
+          <option value="devops">DevOps</option>
+          <option value="ml">ML / AI</option>
+          <option value="mobile">Mobile</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Target Date</label>
+        <input class="form-control" id="goalDate" type="date">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Milestones</label>
+      <div class="milestones-editor" id="milestonesEditor"></div>
+      <button class="add-milestone-btn" onclick="addMilestoneField()">+ Add Milestone</button>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:8px">
+      <button class="btn btn-primary" style="flex:1" onclick="saveGoal()">Save Goal</button>
+      <button class="btn btn-secondary" onclick="closeModal('goalModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Feedback Modal -->
+<div class="modal-overlay" id="feedbackModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('feedbackModal')">✕</button>
+    <h2>Add Mentor Feedback</h2>
+    <div class="form-group">
+      <label>Mentor Name</label>
+      <input class="form-control" id="fb-mentor" placeholder="Mentor's name">
+    </div>
+    <div class="form-group">
+      <label>Related Goal</label>
+      <select class="form-control" id="fb-goal">
+        <option value="">General feedback</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Feedback</label>
+      <textarea class="form-control" id="fb-text" rows="4" placeholder="What did your mentor say?"></textarea>
+    </div>
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-primary" style="flex:1" onclick="saveFeedback()">Save Feedback</button>
+      <button class="btn btn-secondary" onclick="closeModal('feedbackModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/storage.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/goals.js"></script>
+<script src="js/roadmap.js"></script>
+<script src="js/badges.js"></script>
+<script src="js/feedback.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
